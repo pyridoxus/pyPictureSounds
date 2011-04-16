@@ -66,7 +66,7 @@ class ClickableObject(pygame.sprite.Sprite):
     '''
     This is a clickable image with associated sound effect.
     '''
-    def __init__(self, imageFile, soundFile, interface):
+    def __init__(self, imageFile, soundFile, interface, n):
         '''
         Set up the object with the image and the sound.
         '''
@@ -83,6 +83,7 @@ class ClickableObject(pygame.sprite.Sprite):
                                             (self.__interface.getSize()[0],
                                              self.__interface.getSize()[1]))
         self.__rect = self.__icon.get_rect()
+        self.n = n
         
         
     def setRow(self, row):
@@ -106,7 +107,14 @@ class ClickableObject(pygame.sprite.Sprite):
         Set direction of image movement.
         '''
         self.__dir = d
-        
+
+
+    def isClicked(self, mouseLocation):
+        '''
+        Return true if the mouse is inside this icon.
+        '''
+        return self.__rect.collidepoint(mouseLocation)
+    
                 
     def drawIcon(self, bmp):
         '''

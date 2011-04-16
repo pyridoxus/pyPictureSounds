@@ -38,10 +38,12 @@ class Game(object):
         imageDirectory = "/home/pyridoxus/workspace/pyPictureSounds/images/"
         soundDirectory = "/home/pyridoxus/workspace/pyPictureSounds/sounds/"
 
+        n = 0
         for image, sound in objectList:
             clicker = ClickableObject("%s%s" % (imageDirectory, image),
                                       "%s%s" % (soundDirectory, sound),
-                                      self.__interface)
+                                      self.__interface, n)
+            n += 1
             self.__objects.append(clicker)
         print len(self.__objects)
         
@@ -88,11 +90,17 @@ class Game(object):
         
     def loop(self):
         while(True):
+            mouseLocation = (-1000, -1000)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    mouseLocation = pygame.mouse.get_pos()
+            pygame.event.clear()
             self.__screen.fill(self.__black)
             for ob in self.__objects:
+                if ob.isClicked(mouseLocation):
+                    print "Hit image:", ob.n
                 ob.drawIcon(self.__screen)
             pygame.display.flip()
         
