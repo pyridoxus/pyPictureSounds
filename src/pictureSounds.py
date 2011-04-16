@@ -100,7 +100,7 @@ class Game(object):
             self.__screen.fill(self.__black)
             for ob in self.__objects:
                 if ob.isClicked(mouseLocation):
-                    print "Hit image:", ob.n
+                    ob.playSound()
                 ob.drawIcon(self.__screen)
             pygame.display.flip()
         

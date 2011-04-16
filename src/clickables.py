@@ -73,7 +73,6 @@ class ClickableObject(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, self.containers)
         self.__image = pygame.image.load(imageFile)
         self.__sound = pygame.mixer.Sound(soundFile)
-#        self.__sound.play()
         self.__x = 0
         self.__y = 0
         self.__row = None
@@ -116,6 +115,13 @@ class ClickableObject(pygame.sprite.Sprite):
         return self.__rect.collidepoint(mouseLocation)
     
                 
+    def playSound(self):
+        '''
+        Play the sound in this object.
+        '''
+        self.__sound.play()
+
+        
     def drawIcon(self, bmp):
         '''
         Draw the iconic version of the image at the object's coordinates.
