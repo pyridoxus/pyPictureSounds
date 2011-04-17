@@ -3,6 +3,8 @@ Created on Apr 10, 2011
 
 @author: pyridoxus
 '''
+BLACK = 0, 0, 0
+ANIMATIONFRAMES = 200
 
 objectList = [("alligator.bmp",     "baligator3.wav"),
               ("baseball.bmp",      "Ball_Hit_Cheer.wav"),
