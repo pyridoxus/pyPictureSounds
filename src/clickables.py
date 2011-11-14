@@ -130,6 +130,7 @@ class ClickableObject(pygame.sprite.Sprite):
         Play the sound in this object.
         '''
         self.__sound.play()
+        sleep(self.__sound.get_length())
 
         
     def drawIcon(self, bmp):
@@ -219,7 +220,8 @@ class ClickableObject(pygame.sprite.Sprite):
         '''
         for a in range(ANIMATIONFRAMES):
             temp = pygame.transform.smoothscale(self.__image,
-                                                (self.__wa, self.__ha))
+                                                (int(self.__wa),
+                                                 int(self.__ha)))
             tempRect = temp.get_rect()
             tempRect = tempRect.move(self.__xa, self.__ya)
             bmp.fill(BLACK)

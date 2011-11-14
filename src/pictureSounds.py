@@ -18,9 +18,12 @@ class Game(object):
         Setup the game.
         '''
         pygame.init()
-        self.__size = 640,480
-        self.__speed = [2, 2]
+        self.__size = 1280, 1024
+#        self.__size = 1920, 1080
         self.__screen = pygame.display.set_mode(self.__size)
+#        self.__screen = pygame.display.set_mode(self.__size,
+#                    pygame.FULLSCREEN | pygame.DOUBLEBUF | pygame.HWSURFACE)
+        #print pygame.display.list_modes()
         self.__objects = []
         self.__interface = Interface(0, 0, [128, 128], 16)
         self.__initObjects()
@@ -34,8 +37,8 @@ class Game(object):
         '''
         allSprites = pygame.sprite.RenderUpdates()
         ClickableObject.containers = allSprites
-        imageDirectory = "/home/pyridoxus/workspace/pyPictureSounds/images/"
-        soundDirectory = "/home/pyridoxus/workspace/pyPictureSounds/sounds/"
+        imageDirectory = "../images/"
+        soundDirectory = "../sounds/"
 
         n = 0
         for image, sound in objectList:
@@ -54,8 +57,9 @@ class Game(object):
         index = 0
         spacing = self.__interface.getSpacing()
         objectSize = self.__interface.getSize()
-        rows = self.__size[1] / (objectSize[1] + spacing)
+        rows = int(self.__size[1] / (objectSize[1] + spacing))
         columns = len(self.__objects) / rows + 1
+        print rows, columns
         xBase = self.__size[0] / 2 - (((objectSize[0] + spacing) * columns) - \
                                         spacing) / 2
         self.__yBase = self.__size[1] / 2 - (((objectSize[1] + spacing) * \
@@ -70,13 +74,13 @@ class Game(object):
                 x = xBase + a * (objectSize[0] + \
                                         spacing)
                 self.__objects[index].setXY(x, y)
-                print "(%d, %d)" % (x, y)
+                print "(%d, %d)" % (x, y), xEnd
                 index += 1
+                if x > xEnd:
+                    xEnd = x
                 if index == len(self.__objects):
                     b = rows
                     break
-        if x > xEnd:
-            xEnd = x + objectSize[0] + spacing
             
         self.__interface.setLeft(xBase)
         self.__interface.setRight(xEnd)
@@ -90,6 +94,8 @@ class Game(object):
                     sys.exit()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouseLocation = pygame.mouse.get_pos()
+                elif event.type == pygame.KEYDOWN:
+                    sys.exit()
             pygame.event.clear()
             self.__screen.fill(BLACK)
             for ob in self.__objects:
@@ -97,6 +103,7 @@ class Game(object):
                     ob.expandAndPlaySound(self.__screen, self.__size)
                 ob.drawIcon(self.__screen)
             pygame.display.flip()
+            sleep(0.05)
         
 game = Game()
 game.loop()
