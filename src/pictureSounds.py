@@ -20,16 +20,16 @@ class Game(object):
         pygame.init()
         self.__size = 1280, 1024
 #        self.__size = 1920, 1080
-        self.__screen = pygame.display.set_mode(self.__size)
-#        self.__screen = pygame.display.set_mode(self.__size,
-#                    pygame.FULLSCREEN | pygame.DOUBLEBUF | pygame.HWSURFACE)
+#        self.__screen = pygame.display.set_mode(self.__size)
+        self.__screen = pygame.display.set_mode(self.__size,
+                    pygame.FULLSCREEN | pygame.DOUBLEBUF | pygame.HWSURFACE)
         #print pygame.display.list_modes()
         self.__objects = []
         self.__interface = Interface(0, 0, [128, 128], 16)
         self.__initObjects()
         self.__yBase = 0
         self.initPositions()
-        print pygame.mouse.get_cursor()
+#        print pygame.mouse.get_cursor()
         pygame.mouse.set_cursor((16, 16), (0, 0),
                                 (0, 0, 64, 0, 96, 0, 80, 0, 72, 0, 68, 0, 66, 0,
                                  65, 0, 64, 128, 68, 0, 108, 0, 70, 0, 6, 0, 3,
@@ -56,7 +56,7 @@ class Game(object):
                                       self.__interface, n)
             n += 1
             self.__objects.append(clicker)
-        print len(self.__objects)
+#        print len(self.__objects)
         
         
     def initPositions(self):
@@ -68,7 +68,7 @@ class Game(object):
         objectSize = self.__interface.getSize()
         rows = int(self.__size[1] / (objectSize[1] + spacing))
         columns = len(self.__objects) / rows + 1
-        print rows, columns
+#        print rows, columns
         xBase = self.__size[0] / 2 - (((objectSize[0] + spacing) * columns) - \
                                         spacing + objectSize[0]) / 2
         self.__yBase = self.__size[1] / 2 - (((objectSize[1] + spacing) * \
