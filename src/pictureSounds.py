@@ -29,6 +29,15 @@ class Game(object):
         self.__initObjects()
         self.__yBase = 0
         self.initPositions()
+        print pygame.mouse.get_cursor()
+        pygame.mouse.set_cursor((16, 16), (0, 0),
+                                (0, 0, 64, 0, 96, 0, 80, 0, 72, 0, 68, 0, 66, 0,
+                                 65, 0, 64, 128, 68, 0, 108, 0, 70, 0, 6, 0, 3,
+                                 0, 3, 0, 0, 0),
+                                 (192, 0, 224, 0, 240, 0, 248, 0, 252, 0, 254,
+                                  0, 255, 0, 255, 128, 255, 192, 255, 224, 254,
+                                  0, 239, 0, 207, 0, 135, 128, 7, 128, 3, 0))
+
         
         
     def __initObjects(self):
@@ -74,7 +83,7 @@ class Game(object):
                 x = xBase + a * (objectSize[0] + \
                                         spacing)
                 self.__objects[index].setXY(x, y)
-                print "(%d, %d)" % (x, y), xEnd
+#                print "(%d, %d)" % (x, y), xEnd
                 index += 1
                 if x > xEnd:
                     xEnd = x
