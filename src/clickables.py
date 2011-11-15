@@ -138,13 +138,15 @@ class ClickableObject(pygame.sprite.Sprite):
         Draw the iconic version of the image at the object's coordinates.
         '''
         self.__x += self.__dir
+        right = self.__interface.getRight() + self.__interface.getSize()[0] + \
+                    self.__interface.getSpacing()
         if self.__x < self.__interface.getLeft() and self.__dir == -1:
             self.__x = self.__interface.getRight() + \
                         self.__interface.getSize()[0] + \
                         self.__interface.getSpacing() 
             self.__rect = self.__icon.get_rect()
             self.__rect = self.__rect.move(self.__x, self.__y)
-        elif self.__x > self.__interface.getRight() and self.__dir == 1:
+        elif self.__x > right and self.__dir == 1:
             self.__rect = self.__icon.get_rect()
             self.__x = self.__interface.getLeft()
             self.__rect = self.__rect.move(self.__x, self.__y)

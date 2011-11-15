@@ -61,7 +61,7 @@ class Game(object):
         columns = len(self.__objects) / rows + 1
         print rows, columns
         xBase = self.__size[0] / 2 - (((objectSize[0] + spacing) * columns) - \
-                                        spacing) / 2
+                                        spacing + objectSize[0]) / 2
         self.__yBase = self.__size[1] / 2 - (((objectSize[1] + spacing) * \
                                               rows) - spacing) / 2
         xEnd = xBase
